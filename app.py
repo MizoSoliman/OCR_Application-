@@ -59,7 +59,7 @@ st.markdown("""
 .hero {
     background: linear-gradient(135deg, #0a0f1e 0%, #0d1b35 50%, #0a1628 100%);
     border-bottom: 1px solid rgba(56, 189, 248, 0.15);
-    padding: 2.5rem 3rem 2rem;
+    padding: 0.8rem 3rem 0.6rem;
     position: relative;
     overflow: hidden;
 }
@@ -81,15 +81,15 @@ st.markdown("""
 }
 .hero-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 2.6rem;
+    font-size: 1.8rem;
     color: #f0f9ff;
-    margin: 0 0 0.3rem;
+    margin: 0 0 0.2rem;
     letter-spacing: -0.5px;
 }
 .hero-title span { color: #38bdf8; }
 .hero-sub {
     color: #64748b;
-    font-size: 1rem;
+    font-size: 0.88rem;
     font-weight: 300;
     letter-spacing: 0.3px;
 }
@@ -98,10 +98,10 @@ st.markdown("""
     background: rgba(56,189,248,0.08);
     border: 1px solid rgba(56,189,248,0.2);
     color: #38bdf8;
-    font-size: 0.72rem; font-weight: 600;
+    font-size: 0.68rem; font-weight: 600;
     letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 20px;
-    margin-bottom: 1rem;
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 0.4rem;
 }
 
 /* ── Main Layout ── */
@@ -410,7 +410,7 @@ except Exception as e:
     st.stop()
 
 # ─── Main Layout ────────────────────────────────────────────────
-st.markdown('<div class="main-wrap" style="padding:2.5rem 3rem;display:flex;gap:2rem;">', unsafe_allow_html=True)
+st.markdown('<div class="main-wrap" style="padding:1rem 3rem;display:flex;gap:2rem;">', unsafe_allow_html=True)
 
 col_left, col_right = st.columns([1, 1], gap="large")
 
@@ -467,7 +467,7 @@ with col_right:
         """, unsafe_allow_html=True)
     else:
         with st.spinner("جارٍ التحليل..."):
-            preds = predict(img, model, CLASS_NAMES, top_k=5)
+            preds = predict(img, model, CLASS_NAMES, top_k=1)
             best  = preds[0]
             info  = get_drug_info(best["name"], df_drugs)
 
@@ -489,20 +489,6 @@ with col_right:
             </div>
         </div>
         """, unsafe_allow_html=True)
-
-        # ── Top-K list ──
-        st.markdown('<div style="margin-bottom:1.2rem;">', unsafe_allow_html=True)
-        topk_html = ""
-        for i, p in enumerate(preds):
-            rc = rank_class(i)
-            topk_html += f"""
-            <div class="topk-item">
-                <div class="topk-rank {rc}">{i+1}</div>
-                <div class="topk-name">{p['name']}</div>
-                <div class="topk-conf">{p['conf']*100:.1f}%</div>
-            </div>"""
-        st.markdown(topk_html, unsafe_allow_html=True)
-        st.markdown('</div>', unsafe_allow_html=True)
 
         # ── Drug Info Cards ──
         st.markdown(f"""
