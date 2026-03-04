@@ -500,7 +500,7 @@ with col_left:
         key="uploader"
     )
 
-   if uploaded:
+    if uploaded:
     img = Image.open(uploaded).convert("RGB")
 
     import base64
@@ -526,7 +526,6 @@ with col_left:
         """,
         unsafe_allow_html=True
     )
-
         st.markdown(f"""
         <div style="
             display:flex; gap:1rem; margin-top:1rem;
