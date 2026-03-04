@@ -501,31 +501,31 @@ with col_left:
     )
 
     if uploaded:
-    img = Image.open(uploaded).convert("RGB")
-
-    import base64
-    img_bytes = uploaded.getvalue()
-    img_base64 = base64.b64encode(img_bytes).decode()
-
-    st.markdown(
-        f"""
-        <div style="
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        ">
-            <img src="data:image/jpeg;base64,{img_base64}"
-                 style="
-                    max-width:100%;
-                    max-height:380px;
-                    object-fit:contain;
-                    border-radius:16px;
-                    box-shadow:0 10px 30px rgba(0,0,0,0.4);
-                 ">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        img = Image.open(uploaded).convert("RGB")
+    
+        import base64
+        img_bytes = uploaded.getvalue()
+        img_base64 = base64.b64encode(img_bytes).decode()
+    
+        st.markdown(
+            f"""
+            <div style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+            ">
+                <img src="data:image/jpeg;base64,{img_base64}"
+                     style="
+                        max-width:100%;
+                        max-height:380px;
+                        object-fit:contain;
+                        border-radius:16px;
+                        box-shadow:0 10px 30px rgba(0,0,0,0.4);
+                     ">
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
         st.markdown(f"""
         <div style="
             display:flex; gap:1rem; margin-top:1rem;
