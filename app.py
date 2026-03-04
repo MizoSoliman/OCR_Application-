@@ -38,6 +38,12 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+st.markdown("""
+<style>
+    div[data-testid="stMainBlockContainer"] { padding-top: 0 !important; }
+    div[data-testid="stHeader"] { display: none !important; }
+</style>""", unsafe_allow_html=True)
+
 # ─── Kill top padding via JS ────────────────────────────────────
 st.markdown("""
 <style>
