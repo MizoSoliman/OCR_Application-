@@ -38,6 +38,42 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# ─── Kill top padding via JS ────────────────────────────────────
+st.markdown("""
+<style>
+    /* Target every possible Streamlit container */
+    .stMainBlockContainer, 
+    [class*="stMainBlockContainer"],
+    div[data-testid="stMainBlockContainer"],
+    div[data-testid="stAppViewBlockContainer"] {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+</style>
+<script>
+    // JS fallback — runs after render
+    function killPadding() {
+        const selectors = [
+            '[data-testid="stMainBlockContainer"]',
+            '[data-testid="stAppViewBlockContainer"]', 
+            '.main .block-container',
+            'section.main',
+            '.stMain'
+        ];
+        selectors.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+                el.style.paddingTop = '0px';
+                el.style.marginTop = '0px';
+            });
+        });
+    }
+    // Run now and after short delay (Streamlit renders async)
+    killPadding();
+    setTimeout(killPadding, 100);
+    setTimeout(killPadding, 500);
+</script>
+""", unsafe_allow_html=True)
+
 # ─── Custom CSS ─────────────────────────────────────────────────
 st.markdown("""
 <style>
