@@ -48,6 +48,22 @@ st.markdown("""
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
 
+/* Remove ALL Streamlit default padding/gaps */
+[data-testid="stHeader"]              { display: none !important; }
+[data-testid="stToolbar"]             { display: none !important; }
+[data-testid="stDecoration"]          { display: none !important; }
+[data-testid="stMainBlockContainer"]  { padding: 0 !important; }
+[data-testid="stVerticalBlock"]       { gap: 0 !important; }
+[data-testid="stVerticalBlock"] > *   { margin: 0 !important; }
+[data-testid="stColumns"]             { padding: 0 1.5rem !important; gap: 0 !important; }
+[data-testid="stColumns"] > div:first-child {
+    border-right: 1.5px solid rgba(56,189,248,0.3) !important;
+    padding: 1.5rem 2rem 1.5rem 0 !important;
+}
+[data-testid="stColumns"] > div:last-child {
+    padding: 1.5rem 0 1.5rem 2rem !important;
+}
+
 /* The ONE selector that actually works in all Streamlit versions */
 .stMainBlockContainer,
 .stMain .block-container,
@@ -444,12 +460,6 @@ def rank_class(i):
     if i == 1: return "rank-2"
     return "rank-other"
 
-# ─── Collapse top space ────────────────────────────────────────
-st.markdown(
-    "<style>div[data-testid='stMainBlockContainer']{padding-top:0!important}</style>",
-    unsafe_allow_html=True
-)
-
 # ─── Hero ───────────────────────────────────────────────────────
 st.markdown("""
 <div class="hero">
@@ -474,8 +484,6 @@ except Exception as e:
     st.stop()
 
 # ─── Main Layout ────────────────────────────────────────────────
-st.markdown('<div class="main-wrap" style="padding:1rem 3rem;display:flex;gap:2rem;">', unsafe_allow_html=True)
-
 col_left, col_right = st.columns([1, 1])
 
 # ══════════════════════════════════════════════
