@@ -127,6 +127,7 @@ div[data-testid="column"] > div { padding: 0 !important; }
     padding: 0.8rem 3rem 0.6rem;
     position: relative;
     overflow: hidden;
+    margin-bottom: 1.5rem;   /* ← السطر الجديد */
 }
 .hero::before {
     content: '';
