@@ -53,7 +53,37 @@ st.markdown("""
 
 /* Hide Streamlit chrome */
 #MainMenu, footer, header { visibility: hidden; }
-.block-container { padding: 0 !important; max-width: 100% !important; }
+.block-container { 
+    padding: 0 !important; 
+    max-width: 100% !important;
+}
+
+/* Kill ALL default Streamlit spacing */
+.stApp > div:first-child { padding: 0 !important; }
+section[data-testid="stSidebar"] { display: none; }
+div[data-testid="stDecoration"] { display: none; }
+div[data-testid="stToolbar"] { display: none; }
+div[data-testid="stStatusWidget"] { display: none; }
+
+/* Remove top gap Streamlit injects */
+.stApp { overflow-x: hidden; }
+div[class*="appview-container"] { padding-top: 0 !important; }
+section[tabindex="0"] { padding: 0 !important; }
+
+/* Remove gaps between Streamlit elements */
+div[data-testid="stVerticalBlock"] { gap: 0 !important; padding: 0 !important; }
+div[data-testid="stVerticalBlockBorderWrapper"] { padding: 0 !important; }
+div[data-testid="column"] > div { padding: 0 !important; }
+
+/* Column divider stays */
+[data-testid="stColumns"] { gap: 0 !important; padding: 0 1.5rem !important; }
+[data-testid="stColumns"] > div:first-child {
+    border-right: 1.5px solid rgba(56,189,248,0.3) !important;
+    padding: 1.5rem 2rem 1.5rem 0 !important;
+}
+[data-testid="stColumns"] > div:last-child {
+    padding: 1.5rem 0 1.5rem 2rem !important;
+}
 
 /* ── Hero Header ── */
 .hero {
