@@ -317,7 +317,7 @@ def predict(img: Image.Image, model, class_names, top_k=5):
     top_p, top_i = torch.topk(probs, min(top_k, len(class_names)))
     return [
         {"name": class_names[i], "conf": float(p)}
-        for i, p in zip(top_i.squeeze().cpu(), top_p.squeeze().cpu())
+        for i, p in zip(top_i.squeeze(0).cpu().flatten(), top_p.squeeze(0).cpu().flatten())
     ]
 
 # ─── Drug Info ──────────────────────────────────────────────────
