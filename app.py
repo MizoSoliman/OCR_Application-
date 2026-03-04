@@ -109,8 +109,17 @@ st.markdown("""
     padding: 2.5rem 3rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 0;
     min-height: calc(100vh - 180px);
+}
+
+/* ── Column divider ── */
+[data-testid="stColumns"] > div:first-child {
+    border-right: 1.5px solid rgba(56,189,248,0.3) !important;
+    padding-right: 2rem !important;
+}
+[data-testid="stColumns"] > div:last-child {
+    padding-left: 2rem !important;
 }
 
 /* ── Upload Panel ── */
@@ -389,10 +398,10 @@ def rank_class(i):
 # ─── Hero ───────────────────────────────────────────────────────
 st.markdown("""
 <div class="hero">
-    <div class="hero-badge">💊 AI-Powered · EfficientNetB3 · 150 Drugs</div>
-    <div class="hero-title">Pharma<span>Scan</span> AI</div>
-    <div class="hero-sub">
-        صوّر علبة الدواء — النموذج يتعرف عليه فوراً ويعرض الاستخدام والجرعة
+    <div style="text-align:center;">
+        <div class="hero-badge">💊 AI-Powered · EfficientNetB3 · 150 Drugs</div>
+        <div class="hero-title">Pharma<span>Scan</span> AI</div>
+        <div class="hero-sub">صوّر علبة الدواء — النموذج يتعرف عليه فوراً ويعرض الاستخدام والجرعة</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -412,7 +421,7 @@ except Exception as e:
 # ─── Main Layout ────────────────────────────────────────────────
 st.markdown('<div class="main-wrap" style="padding:1rem 3rem;display:flex;gap:2rem;">', unsafe_allow_html=True)
 
-col_left, col_right = st.columns([1, 1], gap="large")
+col_left, col_right = st.columns([1, 1])
 
 # ══════════════════════════════════════════════
 # LEFT COLUMN — Upload + Image Preview
