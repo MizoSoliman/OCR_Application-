@@ -38,21 +38,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ─── Kill top padding via components ────────────────────────────
-import streamlit.components.v1 as components
-components.html("""
-<script>
-    function killPadding() {
-        var el = window.parent.document.querySelector('[data-testid="stMainBlockContainer"]');
-        if (el) el.style.paddingTop = '0px';
-        var el2 = window.parent.document.querySelector('[data-testid="stHeader"]');
-        if (el2) el2.style.display = 'none';
-    }
-    killPadding();
-    setTimeout(killPadding, 200);
-    setTimeout(killPadding, 800);
-</script>
-""", height=0)
+
 
 # ─── Custom CSS ─────────────────────────────────────────────────
 st.markdown("""
@@ -82,7 +68,10 @@ div[data-testid="stVerticalBlock"] > div {
 }
 
 /* Hide Streamlit chrome */
-#MainMenu, footer, header { visibility: hidden; }
+#MainMenu, footer { visibility: hidden; }
+[data-testid="stHeader"] { display: none !important; height: 0 !important; }
+[data-testid="stToolbar"] { display: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
 .block-container { 
     padding: 0 !important; 
     max-width: 100% !important;
