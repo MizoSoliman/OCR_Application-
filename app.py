@@ -38,12 +38,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-st.markdown("""
-<style>
-    div[data-testid="stMainBlockContainer"] { padding-top: 0 !important; }
-    div[data-testid="stHeader"] { display: none !important; }
-</style>""", unsafe_allow_html=True)
-
 # ─── Kill top padding via JS ────────────────────────────────────
 st.markdown("""
 <style>
@@ -85,27 +79,22 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-/* ── Nuclear spacing reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
 
-/* Streamlit injects padding-top on these — kill them all */
-.main, .main > div, 
-[data-testid="stAppViewContainer"],
-[data-testid="stAppViewContainer"] > section,
-[data-testid="stAppViewContainer"] > section > div,
-[data-testid="stMain"],
-[data-testid="stMain"] > div,
-[data-testid="stMainBlockContainer"],
-[data-testid="stVerticalBlock"],
-[data-testid="stVerticalBlockBorderWrapper"],
-.block-container,
-.element-container,
-div[class^="css"] {
+/* The ONE selector that actually works in all Streamlit versions */
+.stMainBlockContainer,
+.stMain .block-container,
+div[data-testid="stMainBlockContainer"] {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
 }
+
+/* Also nuke element spacing */
+div[data-testid="stVerticalBlock"] > div { 
+    gap: 0 !important;
+}
+.element-container { margin: 0 !important; padding: 0 !important; }
 
 .stApp {
     background: #0a0f1e;
@@ -486,9 +475,15 @@ def rank_class(i):
     if i == 1: return "rank-2"
     return "rank-other"
 
+# ─── Collapse top space ────────────────────────────────────────
+st.markdown(
+    "<style>div[data-testid='stMainBlockContainer']{padding-top:0!important}</style>",
+    unsafe_allow_html=True
+)
+
 # ─── Hero ───────────────────────────────────────────────────────
 st.markdown("""
-<div class="hero">
+<div class="hero" style="margin-top:-6rem;">
     <div style="text-align:center;">
         <div class="hero-badge">💊 AI-Powered · EfficientNetB3 · 150 Drugs</div>
         <div class="hero-title">Pharma<span>Scan</span> AI</div>
