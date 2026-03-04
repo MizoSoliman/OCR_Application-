@@ -38,41 +38,21 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ─── Kill top padding via JS ────────────────────────────────────
-st.markdown("""
-<style>
-    /* Target every possible Streamlit container */
-    .stMainBlockContainer, 
-    [class*="stMainBlockContainer"],
-    div[data-testid="stMainBlockContainer"],
-    div[data-testid="stAppViewBlockContainer"] {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-    }
-</style>
+# ─── Kill top padding via components ────────────────────────────
+import streamlit.components.v1 as components
+components.html("""
 <script>
-    // JS fallback — runs after render
     function killPadding() {
-        const selectors = [
-            '[data-testid="stMainBlockContainer"]',
-            '[data-testid="stAppViewBlockContainer"]', 
-            '.main .block-container',
-            'section.main',
-            '.stMain'
-        ];
-        selectors.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => {
-                el.style.paddingTop = '0px';
-                el.style.marginTop = '0px';
-            });
-        });
+        var el = window.parent.document.querySelector('[data-testid="stMainBlockContainer"]');
+        if (el) el.style.paddingTop = '0px';
+        var el2 = window.parent.document.querySelector('[data-testid="stHeader"]');
+        if (el2) el2.style.display = 'none';
     }
-    // Run now and after short delay (Streamlit renders async)
     killPadding();
-    setTimeout(killPadding, 100);
-    setTimeout(killPadding, 500);
+    setTimeout(killPadding, 200);
+    setTimeout(killPadding, 800);
 </script>
-""", unsafe_allow_html=True)
+""", height=0)
 
 # ─── Custom CSS ─────────────────────────────────────────────────
 st.markdown("""
@@ -483,7 +463,7 @@ st.markdown(
 
 # ─── Hero ───────────────────────────────────────────────────────
 st.markdown("""
-<div class="hero" style="margin-top:-4.5rem; padding-top:5rem;">
+<div class="hero">
     <div style="text-align:center;">
         <div class="hero-badge">💊 AI-Powered · EfficientNetB3 · 150 Drugs</div>
         <div class="hero-title">Pharma<span>Scan</span> AI</div>
