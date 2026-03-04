@@ -483,7 +483,7 @@ st.markdown(
 
 # ─── Hero ───────────────────────────────────────────────────────
 st.markdown("""
-<div class="hero" style="margin-top:-6rem;">
+<div class="hero" style="margin-top:-4.5rem; padding-top:5rem;">
     <div style="text-align:center;">
         <div class="hero-badge">💊 AI-Powered · EfficientNetB3 · 150 Drugs</div>
         <div class="hero-title">Pharma<span>Scan</span> AI</div>
